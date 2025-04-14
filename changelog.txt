@@ -1,0 +1,289 @@
+*** WooCommerce Elavon Converge Gateway Changelog ***
+
+2024.08.22 - version 2.14.3
+ * Fix - Ensure payment button text appropriately changes depending on whether we're on the Checkout or Payment page
+ * Misc - Update SkyVerge Plugin Framework to 5.12.7
+ * Fix - Validate terms and conditions checkbox before creating the order in Elavon side.
+
+2024.07.10 - version 2.14.2
+ * Fix - Payment button mislabeled on the Customer payment page
+
+2024.07.02 - version 2.14.1
+ * Misc - Improve compatibility with PHP 8.2+ for the logic handled by the plugin other than WooCommerce core objects
+ * Misc - Rate-limit transaction token endpoint to improve security
+ * Fix - Harden transaction token nonce handling by using better randomization and database read locking
+ * Fix - Prevent blank orders from being created
+ * Misc - Update SkyVerge Plugin Framework to 5.12.5
+
+2024.01.17 - version 2.14.0
+ * Feature - Add support for the WooCommerce Checkout Block
+
+2023.11.17 - version 2.13.2
+ * Misc - Add admin notice to help merchants reverting to the checkout shortcode if the checkout block is used
+ * Localization - Improve the plugin localization of components that are part of the underlying framework dependency
+
+2023.09.21 - version 2.13.1
+ * Fix - Only load payment form JS on Order Pay and Add Payment Method pages
+
+2023.07.03 - version 2.13.0
+ * Misc - Add compatibility for WooCommerce High Performance Order Storage (HPOS)
+
+2023.02.14 - version 2.12.1
+ * Fix - Resolve bug when deleting a saved credit card
+ * Misc - Update SkyVerge Plugin Framework to 5.10.15
+
+2022.12.05 - version 2.12.0
+ * Misc - Require PHP 7.4 and WordPress 5.6
+
+2022.09.12 - version 2.11.6
+ * Fix - Improve handling of orders cancelled by the Hold stock timer
+ * Fix - Replace deprecated `is_ajax()` usages with `wp_doing_ajax()`
+ * Fix - Ensure billing data is retrieved correctly when processing business eChecks
+ * Fix - Show card brand name in admin order transaction notes
+ * Misc - Require WooCommerce 3.9.4 or higher
+
+2021.12.01 - version 2.11.5
+ * Fix - Fully ensure compatibility with currency-based credential swapping snippets
+ * Fix - Ensure transaction token nonces can only be used once in order to help protect against carding attacks
+
+2021.11.04 - version 2.11.4
+ * Fix - Address a fatal error that occurs in environments running PHP 7.2 or lower
+
+2021.11.04 - version 2.11.3
+ * Tweak - Add built-in server IP address check and display on settings page for easy access for merchants
+
+2021.06.23 - version 2.11.2
+ * Tweak - Do not process a successful response containing invalid data
+ * Fix - Update incorrect text domain in gateway class
+ * Dev - Ensure that all transaction requests can pass an order object to improve compatibility with credentials-swapping code snippets
+
+2021.05.17 - version 2.11.1
+ * Fix - Allow transaction to be approved when approval message is in French
+
+2021.04.06 - version 2.11.0
+ * Tweak - Require Checkout.js
+
+2021.03.02 - version 2.10.0
+ * Misc - Announce that Checkout.js will be required on 31 March, 2021
+ * Fix - Prevent a Fatal error while editing the Checkout page using Elementor
+
+2020.12.09 - version 2.9.0
+ * Misc - Add compatibility for WooCommerce 4.7
+ * Misc - Require PHP 7.0 or newer
+
+2020.11.16 - version 2.8.0
+ * Feature - Add support for Checkout.js integration method
+
+2020.09.29 - version 2.7.1
+ * Misc - Remove the SkyVerge help menu item as part of the plugin assets
+
+2020.08.05 - version 2.7.0
+ * Tweak - Migrate payment tokens to be compatible with WooCommerce core payment tokens
+ * Fix - Unblock the UI when removing a token from the admin token editor that was just added but not saved yet
+ * Dev - Deprecate some filter hooks in the payment methods table
+
+2020.06.29 - version 2.6.9
+ * Fix - Force IPV4 for all API requests
+
+2020.06.25 - version 2.6.8
+ * Tweak - Do not send the vendor ID in tokenization requests
+ * Fix - Force TLS v1.2 for all API requests
+
+2020.06.08 - version 2.6.7
+ * Tweak - Send IP address in all transaction requests, to prevent issues when using Elavon's IP hourly limiting security feature
+
+2020.05.20 - version 2.6.6
+ * Fix - Prevent JavaScript error triggered when different versions of the SkyVerge plugin framework are used at the same time
+ * Fix - Address possible JavaScript errors at checkout originating from a previous version of the payment form handler script being cached
+
+2020.05.07 - version 2.6.5
+ * Tweak - Ensure payment gateway scripts can be used when certain script optimization plugins are delaying load
+ * Tweak - Improve the payment form display on mobile devices
+
+2020.05.04 - version 2.6.4
+ * Misc - Add support for WooCommerce 4.1
+
+2020.03.09 - version 2.6.3
+ * Misc - Add support for WooCommerce 4.0
+
+2020.01.02 - version 2.6.2
+ * Misc - Add support for WooCommerce 3.9
+
+2019.11.18 - version 2.6.1
+ * Fix - Do not reduce twice the stock level of a product when the order is held and payment is not completed
+
+2019.11.05 - version 2.6.0
+ * Misc - Add support for WooCommerce 3.8
+
+2019.09.11 - version 2.5.1
+ * Misc - Add an admin notice when a gateway is enabled but is not configured and is unable to take payment
+
+2019.08.12 - version 2.5.0
+ * Misc - Add support for WooCommerce 3.7
+ * Misc - Remove support for WooCommerce 2.6
+ * Misc - Require PHP 5.6+
+
+2019.06.19 - version 2.4.2
+ * Fix - Prevent errors when updating token using special characters
+
+2019.06.05 - version 2.4.1
+ * Fix - Ensure that the CVV number is sent to Elavon when using a saved card or when first purchasing a subscription product
+
+2019.05.07 - version 2.4.0
+ * Misc - Add support for WooCommerce 3.6
+ * Misc - Upgrade to Framework version 5.4
+ * Misc - Require PHP 5.4+
+
+2018.10.23 - version 2.3.3
+ * Fix - Prevent API errors when customer details contain accented characters and exceed character limits
+ * Misc - Add support for WooCommerce 3.5
+
+2018.06.27 - version 2.3.2
+ * Tweak - Auto-update customer address info for their saved tokens on checkout
+ * Fix - Ensure tokens can be deleted locally even if they fail to be deleted remotely
+
+2018.05.23 - version 2.3.1
+ * Tweak - Add payment details to the customer data export and remove it for erasure requests
+ * Tweak - Remove payment tokens for customer data erasure requests
+ * Misc - Add support for WooCommerce 3.4
+
+2018.01.23 - version 2.3.0
+ * Misc - Add support for WooCommerce 3.3
+ * Misc - Remove support for WooCommerce 2.5
+
+2017.09.13 - version 2.2.1
+ * Misc - Use the latest PCI DSS v3.1 compliant API endpoints
+
+2017.08.15 - version 2.2.0
+ * Feature - Orders with only virtual items can now force a charge instead of authorization
+ * Tweak - Add an informative error for multi-currency customers using an unsupported card type
+ * Tweak - Update the API settings labels to be more accurate for easier on-boarding
+ * Tweak - Handle more detailed decline messages
+ * Misc - Add warning for environments without TLS 1.2 support
+
+2017.05.23 - version 2.1.2
+ * Fix - Ensure subscriptions are not affected if Change Payment fails due to declines or other problems
+ * Fix - Ensure old payment methods can be removed after changing subscription payment to a new method
+
+2017.05.02 - version 2.1.1
+ * Fix - Prevent some deprecated notices when processing subscriptions in WooCommerce 3.0+
+ * Fix - Allow refunds for tokenized multi-currency transactions
+ * Tweak - Improve error messaging for actions not supported by multi-currency transactions
+
+2017.03.28 - version 2.1.0
+ * Misc - Added support for WooCommerce 3.0
+ * Misc - Removed support for WooCommerce 2.4
+
+2017.02.07 - version 2.0.3
+ * Fix - Handle tokenization failures due to merchant account misconfiguration
+
+2016.12.07 - version 2.0.2
+ * Fix - Limit the length of billing fields to prevent potential errors when tokenizing credit cards
+ * Fix - Properly set a tokenized credit card's type in all cases
+ * Tweak - Remove the "Test Mode" setting for production accounts. It is no longer functional with the Converge API
+
+2016.10.25 - version 2.0.1
+ * Fix - Always include Customer Code in credit card transactions in case it's required by the merchant account
+ * Fix - Remove invalid characters from customer inputs before sending to the Converge API
+
+2016.10.12 - version 2.0.0
+ * Feature - Adds support for credit card tokenization. Rejoice, for customers can use a saved card at checkout!
+ * Feature - Customers can add new saved cards from the My Account area, without going through the checkout process
+ * Feature - Now supports WooCommerce Subscriptions and WooCommerce Pre-orders, hooray!
+ * Feature - Adds eCheck support for one-time purchases
+ * Feature - You can now opt to show detailed decline messages to your customers, no more generic "an error occurred" messages
+ * Feature - Refund/Void/Capture transactions directly from the WooCommerce admin!
+ * Feature - Enhanced payment form for a better customer experience, uses new retina payment method icons and live inline validation
+ * Feature - Multi-Currency support to allow stores to accept currencies other than USD or CAD at checkout
+ * Misc - Many other small tweaks, fixes, and improvements :)
+ * Misc - Uses SkyVerge Payment Gateway Framework
+
+2016.08.02 - version 1.8.1
+ * Fix - Sanitize card number data to prevent errors with certain characters
+
+2016.06.02 - version 1.8.0
+ * Misc - Added support for WooCommerce 2.6
+ * Misc - Removed support for WooCommerce 2.3
+
+2016.02.02 - version 1.7.1
+ * Fix - Convert billing country code to 3 characters to avoid errors with certain Converge account configurations
+
+2016.01.14 - version 1.7.0
+ * Misc - Added support for WooCommerce 2.5
+ * Misc - Removed support for WooCommerce 2.2
+
+2015.12.11 - version 1.6.1
+ * Fix - Fix error handling when WordPress encounters issues with cURL
+
+2015.07.28 - version 1.6.0
+ * Misc - WooCommerce 2.4 Compatibility
+
+2015.06.16 - version 1.5.1
+ * Tweak - Increase credit card expiration date range to +20 years
+
+2015.04.01 - version 1.5.0
+ * Misc - Rebranded to Elavon Converge
+
+2015.03.03 - version 1.4.0
+ * Feature - Authorize only orders are now placed "On Hold"
+
+2015.02.09 - version 1.3.0
+ * Misc - WooCommerce 2.3 Compatibility
+
+2014.09.07 - version 1.2.3
+ * Misc - WooCommerce 2.2 Compatibility
+
+2014.08.19 - version 1.2.2
+ * Tweak - Improved error reporting for HTTPS checkout issues
+
+2014.01.21 - version 1.2.1
+ * Fix - Required file bug fix
+
+2014.01.20 - version 1.2
+ * Misc - Uses SkyVerge Plugin Framework
+ * Misc - WooCommerce 2.1 Compatibility
+
+2013.12.13 - version 1.1.6
+ * Feature - Enhanced request logging
+ * Tweak - Added wc_payment_gateway_elavon_vm_request_xml filter for modifying the transaction request
+
+2013.11.09 - version 1.1.5
+ * Tweak - ssl_cardholder_ip parameter included in transaction request
+
+2013.10.18 - version 1.1.4
+ * Tweak - Billing address fields validated for maximum length
+
+2013.07.26 - version 1.1.3
+ * Tweak - Site URL passed as HTTP Referer in payment request
+
+2013.07.11 - version 1.1.2
+ * Fix - Fixes a bug on the settings page
+
+2013.07.01 - version 1.1.1
+ * Rebrand to SkyVerge, Inc.
+
+2013.01.23 - version 1.1
+ * WooCommerce 2.0 Compatibility
+
+2012.12.10 - version 1.0.4
+ * Fix - Improved test mode/demo account handling
+ * Fix - Checkout fields containing HTML special characters properly handled
+ * Fix - ssl_customer_code included in transaction (Thanks Nathaniel Schweinberg)
+ * Tweak - removed curl dependency
+ * Tweak - improved dependency checking
+
+2012.12.05 - version 1.0.3
+ * Updater
+
+2012.10.24 - version 1.0.2
+ * Feature - Accepted card type icons automatically displayed in checkout
+ * Feature - Accepted card types can be modified with new filter 'woocommerce_elavon_card_types'
+ * Feature - ssl_salestax included in transaction
+ * Feature - WPML support
+ * Feature - ability to record transaction attempts/communication to a log file
+
+2012.07.26 - version 1.0.1
+ * Fix - American Express accounts now accepted
+
+2012.07.04 - version 1.0
+ * First Release
