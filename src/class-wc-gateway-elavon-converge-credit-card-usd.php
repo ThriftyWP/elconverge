@@ -81,10 +81,18 @@ class WC_Gateway_Elavon_Converge_Credit_Card_USD extends WC_Gateway_Elavon_Conve
 
     public function get_option_key() {
         return 'woocommerce_' . $this->id . '_settings';
-    }    
+    }
+    
+    public function get_field_key( $key ) {
+        return $this->id . '_' . $key;
+    }
     
     public function process_admin_options() {
-        update_option( $this->get_option_key(), $this->settings );
+        $this->init_settings(); // Important if needed
         parent::process_admin_options();
+    }
+
+    public function get_method_form_fields() {
+        return $this->form_fields;
     }
 }
