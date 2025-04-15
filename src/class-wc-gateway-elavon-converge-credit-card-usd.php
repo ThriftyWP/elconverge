@@ -13,6 +13,7 @@ class WC_Gateway_Elavon_Converge_Credit_Card_USD extends WC_Gateway_Elavon_Conve
         // IMPORTANT: We need to do direct property assignments rather than 
         // letting the parent constructor handle it
         $this->id = 'elavon_converge_usd';
+        $this->title = 'Credit Card (USD)';
         
         // Call parent constructor without passing the ID parameter
         // This way our ID won't be overwritten
@@ -20,6 +21,7 @@ class WC_Gateway_Elavon_Converge_Credit_Card_USD extends WC_Gateway_Elavon_Conve
         
         // Re-assign critical properties after parent constructor
         $this->id = 'elavon_converge_usd';
+        $this->title = 'Credit Card (USD)';
         $this->method_title = __('Elavon Converge Credit Card (USD)', 'woocommerce-gateway-elavon');
         $this->method_description = __('Accept credit card payments in USD via Elavon Converge.', 'woocommerce-gateway-elavon');
         
