@@ -44,7 +44,7 @@ class WC_Gateway_Elavon_Converge_Credit_Card_CAD extends WC_Gateway_Elavon_Conve
     public function is_available() {
         error_log('[Elavon CAD] Checking availability');
         return true;
-    }
+    }   
     
     /**
      * Initialize form fields with currency-specific settings
@@ -78,4 +78,13 @@ class WC_Gateway_Elavon_Converge_Credit_Card_CAD extends WC_Gateway_Elavon_Conve
     public function get_multi_currency_terminal_currency() {
         return 'CAD';
     }
+
+    public function get_option_key() {
+        return 'woocommerce_' . $this->id . '_settings';
+    }  
+    
+    public function process_admin_options() {
+        update_option( $this->get_option_key(), $this->settings );
+        parent::process_admin_options();
+    } 
 }
