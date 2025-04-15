@@ -68,16 +68,16 @@ class WC_Gateway_Elavon_Converge_Credit_Card_USD extends WC_Gateway_Elavon_Conve
     /**
      * Always return true for multi-currency enabled
      */
-    public function is_multi_currency_enabled() {
-        return true;
-    }
+    // public function is_multi_currency_enabled() {
+    //     return true;
+    // }
     
     /**
      * Always return USD as the terminal currency
      */
-    public function get_multi_currency_terminal_currency() {
-        return 'USD';
-    }
+    // public function get_multi_currency_terminal_currency() {
+    //     return 'USD';
+    // }
 
     public function get_option_key() {
         return 'woocommerce_' . $this->id . '_settings';
@@ -87,12 +87,16 @@ class WC_Gateway_Elavon_Converge_Credit_Card_USD extends WC_Gateway_Elavon_Conve
         return $this->id . '_' . $key;
     }
     
+    public function init_settings() {
+        $this->settings = get_option( $this->get_option_key(), array() );
+    }
+    
     public function process_admin_options() {
-        $this->init_settings(); // Important if needed
+        $this->init_settings(); // Ensures $this->settings is populated
         parent::process_admin_options();
+    
+        // Also save the settings manually to make sure they're updated
+        update_option( $this->get_option_key(), $this->settings );
     }
-
-    public function get_method_form_fields() {
-        return $this->form_fields;
-    }
+    
 }
