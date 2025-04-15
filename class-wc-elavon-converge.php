@@ -64,6 +64,18 @@ class WC_Elavon_Converge extends Framework\SV_WC_Payment_Gateway_Plugin {
 	/** string echeck gateway ID */
 	const ECHECK_GATEWAY_ID = 'elavon_converge_echeck';
 
+	/** string credit card CAD gateway class name */
+	const CREDIT_CARD_CAD_GATEWAY_CLASS_NAME = 'WC_Gateway_Elavon_Converge_Credit_Card_CAD';
+
+	/** string credit card CAD gateway ID */
+	const CREDIT_CARD_CAD_GATEWAY_ID = 'elavon_converge_cad';
+
+	/** string credit card USD gateway class name */
+	const CREDIT_CARD_USD_GATEWAY_CLASS_NAME = 'WC_Gateway_Elavon_Converge_Credit_Card_USD';
+
+	/** string credit card USD gateway ID */
+	const CREDIT_CARD_USD_GATEWAY_ID = 'elavon_converge_usd';	
+
 
 	/**
 	 * Initializes the plugin.
@@ -71,15 +83,18 @@ class WC_Elavon_Converge extends Framework\SV_WC_Payment_Gateway_Plugin {
 	 * @since 1.2.0
 	 */
 	public function __construct() {
-
 		parent::__construct(
 			self::PLUGIN_ID,
 			self::VERSION,
 			[
 				'text_domain'        => 'woocommerce-gateway-elavon',
 				'gateways'           => [
+					// Original gateways
 					self::CREDIT_CARD_GATEWAY_ID => self::CREDIT_CARD_GATEWAY_CLASS_NAME,
 					self::ECHECK_GATEWAY_ID      => self::ECHECK_GATEWAY_CLASS_NAME,
+					// New currency-specific gateways
+					self::CREDIT_CARD_CAD_GATEWAY_ID => self::CREDIT_CARD_CAD_GATEWAY_CLASS_NAME,
+					self::CREDIT_CARD_USD_GATEWAY_ID => self::CREDIT_CARD_USD_GATEWAY_CLASS_NAME,
 				],
 				'supported_features' => [
 					'hpos'   => true,
@@ -98,11 +113,10 @@ class WC_Elavon_Converge extends Framework\SV_WC_Payment_Gateway_Plugin {
 				],
 			]
 		);
-
+	
 		// Load the gateway
 		$this->includes();
 	}
-
 
 	/**
 	 * Determine if TLS v1.2 is required for this plugin's API requests.
@@ -156,31 +170,34 @@ class WC_Elavon_Converge extends Framework\SV_WC_Payment_Gateway_Plugin {
 	 * @since 2.0.0
 	 */
 	public function includes() {
-
+		// Original includes
 		// api
 		require_once( $this->get_plugin_path() . '/src/api/class-wc-elavon-converge-api.php' );
-
+		
 		// transaction token nonce handler
 		require_once( $this->get_plugin_path() . '/src/Transaction_Token_Nonce_Handler.php' );
-
+		
 		// gateway classes
 		require_once( $this->get_plugin_path() . '/src/abstract-wc-gateway-elavon-converge.php' );
 		require_once( $this->get_plugin_path() . '/src/class-wc-gateway-elavon-converge-credit-card.php' );
 		require_once( $this->get_plugin_path() . '/src/class-wc-gateway-elavon-converge-echeck.php' );
 		require_once( $this->get_plugin_path() . '/src/class-wc-gateway-elavon-converge-token.php' );
 		require_once( $this->get_plugin_path() . '/src/class-wc-gateway-elavon-converge-tokens-handler.php' );
-
+		
+		// New currency-specific gateway classes
+		require_once( $this->get_plugin_path() . '/src/class-wc-gateway-elavon-converge-credit-card-cad.php' );
+		require_once( $this->get_plugin_path() . '/src/class-wc-gateway-elavon-converge-credit-card-usd.php' );
+		
 		// payment forms
 		require_once( $this->get_plugin_path() . '/src/payment-forms/class-wc-elavon-converge-payment-form.php' );
 		require_once( $this->get_plugin_path() . '/src/payment-forms/class-wc-elavon-converge-echeck-payment-form.php' );
-
+		
 		// handlers
 		require_once( $this->get_plugin_path() . '/src/AJAX.php' );
-
+		
 		// blocks
 		require_once( $this->get_plugin_path() . '/src/Blocks/Traits/Checkout_Block_Integration_Trait.php' );
 	}
-
 
 	/**
 	 * Initializes the plugin.
