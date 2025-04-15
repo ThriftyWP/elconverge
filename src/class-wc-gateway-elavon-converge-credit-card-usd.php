@@ -10,34 +10,40 @@ class WC_Gateway_Elavon_Converge_Credit_Card_USD extends WC_Gateway_Elavon_Conve
      * Constructor with specific ID and currency settings
      */
     public function __construct() {
-        // We need to set the ID before calling parent constructor
+        // IMPORTANT: We need to do direct property assignments rather than 
+        // letting the parent constructor handle it
         $this->id = 'elavon_converge_usd';
         
-        // Call parent constructor with specific args
-        parent::__construct(
-            'elavon_converge_usd',
-            array(
-                'method_title' => __('Elavon Converge Credit Card (USD)', 'woocommerce-gateway-elavon'),
-                'method_description' => __('Accept credit card payments in USD via Elavon Converge.', 'woocommerce-gateway-elavon'),
-                'supports' => array(
-                    self::FEATURE_CARD_TYPES,
-                    self::FEATURE_CREDIT_CARD_CHARGE,
-                    self::FEATURE_CREDIT_CARD_AUTHORIZATION,
-                    self::FEATURE_CREDIT_CARD_CAPTURE,
-                    self::FEATURE_REFUNDS,
-                    self::FEATURE_VOIDS,
-                    self::FEATURE_TOKENIZATION,
-                    self::FEATURE_ADD_PAYMENT_METHOD,
-                    self::FEATURE_TOKEN_EDITOR,
-                    self::FEATURE_CREDIT_CARD_CHARGE_VIRTUAL,
-                ),
-            )
-        );
+        // Call parent constructor without passing the ID parameter
+        // This way our ID won't be overwritten
+        parent::__construct();
+        
+        // Re-assign critical properties after parent constructor
+        $this->id = 'elavon_converge_usd';
+        $this->method_title = __('Elavon Converge Credit Card (USD)', 'woocommerce-gateway-elavon');
+        $this->method_description = __('Accept credit card payments in USD via Elavon Converge.', 'woocommerce-gateway-elavon');
         
         // Set currency-specific options
         $this->multi_currency_enabled = 'yes';
         $this->multi_currency_terminal_currency = 'USD';
+        
+        // Make sure settings use our gateway ID
+        add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
+        
+        error_log('[Elavon USD] Gateway initialized with ID: ' . $this->id);
+        
+        // Force gateway to be visible
+        $this->update_option('enabled', 'yes');
     }
+    
+    /**
+     * Override is_available to always return true for testing
+     */
+    public function is_available() {
+        error_log('[Elavon USD] Checking availability');
+        return true;
+    }
+    
     
     /**
      * Initialize form fields with currency-specific settings
